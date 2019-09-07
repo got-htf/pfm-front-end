@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
-import { Container, Content , Item, Input} from 'native-base';
 import { styles } from './style';
 import Logo from '../../components/Logo';
 import Form from '../../components/Form';
 
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity
@@ -14,36 +12,26 @@ import {
 
 export default class Login extends Component {
   onLoginFinished = (error, result) => {
-    
+    if (error) {
+      console.log("login has error: " + result.error);
+    } else if (result.isCancelled) {
+      console.log("login is cancelled.");
+    } else {
+      AccessToken.getCurrentAccessToken().then(
+        (data) => {
+          console.log(data.accessToken.toString());
+          
+        }
+      )
+    }
   }
   render() {
     return (
-      // <Container style={{paddingTop: 100, justifyContent: 'center', alignItems: 'center'}}>
-      //   <View>
-      //     <LoginButton
-      //       onLoginFinished={
-      //         (error, result) => {
-      //           if (error) {
-      //             console.log("login has error: " + result.error);
-      //           } else if (result.isCancelled) {
-      //             console.log("login is cancelled.");
-      //           } else {
-      //             AccessToken.getCurrentAccessToken().then(
-      //               (data) => {
-      //                 console.log(data.accessToken.toString())
-      //               }
-      //             )
-      //           }
-      //         }
-      //       }
-      //       onLogoutFinished={() => console.log("logout.")}/>
-      //   </View>
-      // </Container>
       <View style={styles.container}>
-        <Logo/>
+        <Logo />
 
         <Form type="Login" />
-
+        <LoginButton onLoginFinished={(error, result) => this.onLoginFinished(error, result)}/>
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Dont have an account yet?</Text>
 
