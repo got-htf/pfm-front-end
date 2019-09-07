@@ -1,21 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
+import App from './app/containers/App';
 
-
-import { AppContainer } from './app/router';
-
-const App: () => React$Node = () => {
+const PfmApp = () => {
   return (
-    <AppContainer/>
+    <App/>
   );
 };
 
 
-export default App;
+export default PfmApp;
