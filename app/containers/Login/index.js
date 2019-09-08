@@ -20,6 +20,11 @@ export class Login extends Component {
     this.props.testAction(id);
   }
 
+  handleFacebookLoginSuccess(fbToken) {
+    // Code logic to store user
+    this.props.navigation.navigate('App');
+  }
+
   onLoginFinished = (error, result) => {
     if (error) {
       console.log("login has error: " + result.error);
@@ -30,6 +35,7 @@ export class Login extends Component {
         (data) => {
           console.log(data.accessToken.toString());
           
+          
         }
       )
     }
@@ -39,7 +45,7 @@ export class Login extends Component {
       <View style={styles.container}>
         <Logo />
 
-        <Form type="Login" />
+        <Form type="Login" onFbLoginsuccess={(fbToken) => this.handleFacebookLoginSuccess(fbToken)} />
         <LoginButton onLoginFinished={(error, result) => this.onLoginFinished(error, result)}/>
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Dont have an account yet?</Text>

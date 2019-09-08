@@ -1,12 +1,10 @@
 import React from 'react';
-import Login from '../Login';
-import { AppContainer } from '../../router';
+import { AppContainer, StackWithLogin } from '../../router';
 export default class App extends React.Component {
     isLoggedIn = () => {
         // Implement logic to check if user has been loggedin
         return false;
     }
-
     render() {
         if (this.isLoggedIn()) {
             return (
@@ -14,7 +12,7 @@ export default class App extends React.Component {
             )
         } else {
             return (
-                <Login></Login>
+                <StackWithLogin/>
             )
         }
     }

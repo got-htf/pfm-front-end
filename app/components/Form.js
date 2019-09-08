@@ -37,9 +37,9 @@ export default class Form extends React.Component {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>{this.props.type}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonFacebook}>
+        <TouchableOpacity style={styles.buttonFacebook} onPress={() => {this.props.onFbLoginsuccess(12121)}}>
           <Text style={styles.buttonText}>Login with Facebook</Text>
-        </TouchableOpacity>        
+        </TouchableOpacity>       
       </View>
     );
   }
