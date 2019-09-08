@@ -15,8 +15,7 @@ npm install
 
 # Configuration dependencies
 On Android, you need a litle bit more config
-For facebook login: 
-Folow guideline on this page https://github.com/facebook/react-native-fbsdk
+For facebook login, follow guideline on this page https://github.com/facebook/react-native-fbsdk
 
 ## Run
 
