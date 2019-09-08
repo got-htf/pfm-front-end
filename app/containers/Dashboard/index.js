@@ -22,13 +22,13 @@ export default class Dashboard extends Component {
       ],
     };
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 20 }}>
       <Text>
       Bezier Line Chart
     </Text>
     <LineChart
       data={line}
-      width={Dimensions.get('window').width} // from react-native
+      width={Dimensions.get('window').width - 40} // from react-native
       height={220}
       yAxisLabel={'$'}
       chartConfig={{
