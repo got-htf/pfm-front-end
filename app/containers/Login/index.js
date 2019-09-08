@@ -10,7 +10,16 @@ import {
   TouchableOpacity
 } from "react-native";
 
-export default class Login extends Component {
+import { connect } from 'react-redux';
+import { TYPES } from './action-types';
+import dispatchToProps from './dispatch-to-props';
+
+export class Login extends Component {
+
+  login(id) {
+    this.props.testAction(id);
+  }
+
   onLoginFinished = (error, result) => {
     if (error) {
       console.log("login has error: " + result.error);
@@ -35,7 +44,7 @@ export default class Login extends Component {
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Dont have an account yet?</Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.login(11)}>
             <Text style={styles.signupButton}> Signup</Text>
           </TouchableOpacity>
         </View>
@@ -43,3 +52,19 @@ export default class Login extends Component {
     );
   }
 };
+
+const testAction = (id) => {
+  console.log("Come here: aaaaaaaaaaa" + id);
+  return (dispatch) => {
+    console.log(dispatch);
+    dispatch({
+      type: TYPES.LOGIN
+    });
+  }
+}
+
+const mapDispatchToProps = {
+  testAction
+}
+
+export default connect(null, dispatchToProps)(Login);
