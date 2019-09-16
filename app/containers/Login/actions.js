@@ -5,3 +5,33 @@ export const loginFacebook = () => {
         type: TYPES.LOGIN
     }
 }
+
+export const requestFacebookPermissionSuccess = () => {
+    return {
+        type: TYPES.REQUEST_PERMISSION_SUCCESS
+    }
+}
+
+export const requestFacebookPermissionFailed = () => {
+    return {
+        type: TYPES.REQUEST_PERMISSION_FAILED
+    }
+}
+
+export const userCancelledLogin = () => {
+    return {
+        type: TYPES.USER_CANCELLED_LOGIN
+    }
+}
+
+export const serverAuthSuccess = () => {
+    return {
+        type: TYPES.SERVER_AUTH_SUCCESS
+    }
+}
+
+export const serverAuthFailed = () => {
+    return {
+        type: TYPES.SERVER_AUTH_FAILED
+    }
+}

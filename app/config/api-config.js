@@ -1,6 +1,6 @@
-export const SCHEMA = 'https';
-export const API_HOST_NAME = 'jsonplaceholder.typicode.com';
-export const API_PORT = 80;
+export const SCHEMA = 'http';
+export const API_HOST_NAME = 'localhost';
+export const API_PORT = 3000;
 export const API_VERSION = '';
 export const APIS = {
     CREATE_ACCOUNT: {
@@ -9,6 +9,6 @@ export const APIS = {
     },
     LOGIN_FACEBOOK: {
         method: 'POST',
-        path: '/auth/fb'
+        path: '/auth/login'
     }
 }

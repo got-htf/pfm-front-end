@@ -11,15 +11,9 @@ import {
 } from "react-native";
 
 import { connect } from 'react-redux';
-import { TYPES } from './action-types';
 import dispatchToProps from './dispatch-to-props';
 
 export class Login extends Component {
-
-  login(id) {
-    this.props.testAction(id);
-  }
-
   onLoginFinished = (error, result) => {
     if (error) {
       console.log("login has error: " + result.error);
@@ -29,7 +23,6 @@ export class Login extends Component {
       AccessToken.getCurrentAccessToken().then(
         (data) => {
           console.log(data.accessToken.toString());
-          
         }
       )
     }
@@ -38,13 +31,13 @@ export class Login extends Component {
     return (
       <View style={styles.container}>
         <Logo />
-
-        <Form type="Login" />
+        <Form type="Login" 
+          onFacebookLoginButtonPressed={() => this.props.handleFacebookLogin()}/>
         <LoginButton onLoginFinished={(error, result) => this.onLoginFinished(error, result)}/>
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Dont have an account yet?</Text>
 
-          <TouchableOpacity onPress={() => this.login(11)}>
+          <TouchableOpacity>
             <Text style={styles.signupButton}> Signup</Text>
           </TouchableOpacity>
         </View>
@@ -52,19 +45,5 @@ export class Login extends Component {
     );
   }
 };
-
-const testAction = (id) => {
-  console.log("Come here: aaaaaaaaaaa" + id);
-  return (dispatch) => {
-    console.log(dispatch);
-    dispatch({
-      type: TYPES.LOGIN
-    });
-  }
-}
-
-const mapDispatchToProps = {
-  testAction
-}
 
 export default connect(null, dispatchToProps)(Login);

@@ -1,14 +1,18 @@
 import React from 'react';
 import Login from '../Login';
 import { AppContainer } from '../../router';
-export default class App extends React.Component {
-    isLoggedIn = () => {
-        // Implement logic to check if user has been loggedin
-        return false;
+
+import { connect } from 'react-redux';
+import dispatchToProps from './dispatch-to-props';
+
+class App extends React.Component {
+    componentDidMount() {
+        this.props.getUserData();
     }
 
     render() {
-        if (this.isLoggedIn()) {
+        const { isLoggedIn } = this.props;
+        if (isLoggedIn) {
             return (
                 <AppContainer/>
             )
@@ -19,3 +23,10 @@ export default class App extends React.Component {
         }
     }
 }
+
+function mapStateToProps(state) {
+    const { isLoggedIn } = state.appContainer;
+    return { isLoggedIn: isLoggedIn }
+}
+
+export default connect(mapStateToProps, dispatchToProps)(App);

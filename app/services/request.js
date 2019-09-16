@@ -16,7 +16,7 @@ export default class HttpRequest {
 
     send(data = null) {
         if (data && data.body) {
-            this.reqInit.body = JSON.stringify(bodyData);
+            this.reqInit.body = JSON.stringify(data.body);
         }
 
         if (data && data.queryParams) {
