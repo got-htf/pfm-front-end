@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import { LoginButton } from 'react-native-fbsdk';
 import { styles } from './style';
 import Logo from '../../components/Logo';
 import Form from '../../components/Form';
@@ -7,33 +7,44 @@ import Form from '../../components/Form';
 import {
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
+  StatusBar
 } from "react-native";
 
 import { connect } from 'react-redux';
-import dispatchToProps from './dispatch-to-props';
+import { handleFacebookLogin } from './dispatch-to-props';
+import { is } from '@babel/types';
 
-export class Login extends Component {
-  onLoginFinished = (error, result) => {
-    if (error) {
-      console.log("login has error: " + result.error);
-    } else if (result.isCancelled) {
-      console.log("login is cancelled.");
-    } else {
-      AccessToken.getCurrentAccessToken().then(
-        (data) => {
-          console.log(data.accessToken.toString());
-        }
-      )
+class Login extends React.Component {
+
+  /**
+   * Login Facebook
+   */
+  loginFacebook = async () => {
+    const response = await this.props.handleFacebookLogin();
+
+    if (response) {
+      this.props.navigation.navigate('App');
     }
   }
+
   render() {
+
+    const { isAuthenticating } = this.props;
+    if (isAuthenticating) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <Logo />
         <Form type="Login" 
-          onFacebookLoginButtonPressed={() => this.props.handleFacebookLogin()}/>
-        <LoginButton onLoginFinished={(error, result) => this.onLoginFinished(error, result)}/>
+          onFacebookLoginButtonPressed={() => this.loginFacebook()}/>
+        <LoginButton/>
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Dont have an account yet?</Text>
 
@@ -46,4 +57,11 @@ export class Login extends Component {
   }
 };
 
-export default connect(null, dispatchToProps)(Login);
+function mapStateToProps(state) {
+  const { isAuthenticating } = state.login;
+  return { isAuthenticating: isAuthenticating }
+}
+
+export default connect(mapStateToProps, {
+  handleFacebookLogin: handleFacebookLogin
+})(Login);

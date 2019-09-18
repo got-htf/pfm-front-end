@@ -17,3 +17,11 @@ export const getToken = async () => {
         console.log("Something went wrong", error);
     }
 }
+
+export const removeUserData = async () => {
+    try {
+        await AsyncStorage.removeItem(STORAGE_KEY.USER_DATA);
+    } catch (error) {
+        console.log("Something went wrong", error);
+    }
+}

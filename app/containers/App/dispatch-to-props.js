@@ -8,8 +8,9 @@ export const getUserData = () => {
         if (userData) {
             dispatch(getUserDataSuccess());
         } else {
-            dispatch(getUserDataFailed())
+            dispatch(getUserDataFailed());
         }
+        return userData;
     }
 }
 

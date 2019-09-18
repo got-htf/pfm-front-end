@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { bottomTabScreen } from './screens';
+import Login, { MyAuth } from '../containers/Login';
+import App from '../containers/App';
+import { View, Text } from 'native-base';
 
 const getIconName = (routeName, focused) => {
     switch(routeName) {
@@ -32,6 +36,24 @@ const TabNavigator = createBottomTabNavigator(
         inactiveTintColor: 'gray',
       },
     }
-  );
-  
-  export const AppContainer = createAppContainer(TabNavigator);
+);
+
+// const AppContainer = createAppContainer(TabNavigator);
+
+const AuthStack = createStackNavigator({ Login: Login });
+const AppStack = createStackNavigator({Home: TabNavigator});
+
+
+
+export const AppContainer = createAppContainer(createSwitchNavigator(
+    {
+        Bootstrap: App,
+        App: AppStack,
+        Auth: Login,
+    },
+    {
+        initialRouteName: 'Bootstrap',
+    }
+));
+
+

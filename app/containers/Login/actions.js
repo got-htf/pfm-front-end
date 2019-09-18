@@ -6,6 +6,12 @@ export const loginFacebook = () => {
     }
 }
 
+export const startRequestFacebookPermission = () => {
+    return {
+        type: TYPES.REQUEST_PERMISSION_START
+    }
+}
+
 export const requestFacebookPermissionSuccess = () => {
     return {
         type: TYPES.REQUEST_PERMISSION_SUCCESS

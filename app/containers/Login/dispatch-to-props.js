@@ -4,21 +4,32 @@ import {
     requestFacebookPermissionFailed, 
     userCancelledLogin,
     serverAuthFailed,
-    serverAuthSuccess
+    serverAuthSuccess,
+    startRequestFacebookPermission
 } from "./actions";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import HttpRequest from "../../services/request";
 import { APIS } from "../../config/api-config";
 import { storeToken } from "../../helpers/auth";
 
-const handleFacebookLogin = () => {
+export const handleFacebookLogin = () => {
     return async(dispatch) => {
+        dispatch(startRequestFacebookPermission());
         const login = await LoginManager.logInWithPermissions(["public_profile"]);
         if (login.isCancelled) {
-            return dispatch(userCancelledLogin());
+            dispatch(userCancelledLogin());
+            return null;
         }
         const accessData = await AccessToken.getCurrentAccessToken();
-        await authenticate(dispatch, accessData.accessToken);
+
+        if (accessData && accessData.accessToken) {
+            dispatch(requestFacebookPermissionSuccess())
+            return await authenticate(dispatch, accessData.accessToken);
+        }
+
+        dispatch(requestFacebookPermissionFailed());
+
+        return null;
     }
 }
 
@@ -37,9 +48,5 @@ const authenticate = async (dispatch, accessToken) => {
     } else {
         dispatch(serverAuthFailed());
     }
-}
-
-
-export default {
-    handleFacebookLogin
+    return json;
 }
