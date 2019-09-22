@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
@@ -44,6 +45,8 @@
      sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
   ];
+  
+  [RCTLinkingManager application:application openURL:url options:options];
   
   return handled;
 }
