@@ -1,38 +1,16 @@
 import React, { Component } from 'react';
-// import { View , Text, Linking} from 'react-native';
-// import { Button } from 'native-base';
-// import { storeToken, removeUserData } from '../../helpers/auth';
+import { 
+    StyleSheet, Text, View, ScrollView, 
+    ImageBackground, TouchableHighlight,TouchableOpacity 
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Header, Left, Body, Right } from 'native-base';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { connect } from 'react-redux';
 
-import { Platform, StyleSheet, Text, View, ScrollView, Image, ImageBackground, TouchableHighlight,TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { Header, Left, Body, Right } from 'native-base'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-
-
-
-// export default class Home extends React.Component {
-//   componentDidMount() {
-//     Linking.getInitialURL().then((url) => {
-//       if (url) {
-//         console.log('Initial url is: ' + url);
-//       }
-//     }).catch(err => console.error('An error occurred', err));
-//   }
-//   render() {
-//     return (
-//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//         <Text>Home screen!</Text>
-//         <Button onPress={() => {removeUserData()}}><Text>Logout</Text></Button>
-//       </View>
-//     );
-//   }
-// }
-
-
-export default class Home extends Component {
-  static navigationOptions = { header: null };
+class More extends Component {
   render() {
       return (
           <View style={styles.container}>
@@ -329,6 +307,8 @@ export default class Home extends Component {
       );
   }
 }
+
+export default connect(null, null)(More);
 
 const styles = StyleSheet.create({
   container: {

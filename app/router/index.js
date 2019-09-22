@@ -4,18 +4,21 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { bottomTabScreen } from './screens';
-import Login, { MyAuth } from '../containers/Login';
+import Login from '../containers/Login';
 import App from '../containers/App';
-import { View, Text } from 'native-base';
 
 const getIconName = (routeName, focused) => {
     switch(routeName) {
         case 'Home':
             return `ios-home`;
-        case 'Activities':
+        case 'CashFlow':
             return `ios-pulse`;
-        case 'Dashboard':
-            return `ios-podium`;
+        case 'PFM':
+            return `ios-card`;
+        case 'Transfer':
+            return `ios-filing`;
+        case 'More':
+            return `ios-more`;
         default:
             return ``;
     }
@@ -41,7 +44,17 @@ const TabNavigator = createBottomTabNavigator(
 // const AppContainer = createAppContainer(TabNavigator);
 
 const AuthStack = createStackNavigator({ Login: Login });
-const AppStack = createStackNavigator({Home: TabNavigator});
+const AppStack = createStackNavigator(
+    {
+        Home: TabNavigator
+    }, 
+    {
+        headerMode: 'none',
+        navigationOptions: {
+            headerVisible: false,
+        }
+    }
+);
 
 
 
